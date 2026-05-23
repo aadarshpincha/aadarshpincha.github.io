@@ -3,24 +3,544 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aadarsh Pincha</title>
+<title>Aadarsh Pincha — Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
 <style>
-  body { font-family: Georgia, serif; max-width: 680px; margin: 80px auto; padding: 0 24px; color: #111; line-height: 1.7; }
-  h1 { font-size: 28px; font-weight: normal; margin-bottom: 4px; }
-  .sub { color: #666; font-size: 15px; margin-bottom: 40px; }
-  h2 { font-size: 16px; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-top: 48px; }
-  p { font-size: 16px; }
-  a { color: #111; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f12;
+    --surface: #141720;
+    --border: #1e2230;
+    --accent: #c8a96e;
+    --text: #e8e6e0;
+    --muted: #7a7f96;
+    --dim: #3a3f52;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.75;
+    font-size: 16px;
+  }
+
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  nav .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+  }
+
+  nav ul a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  nav ul a:hover { color: var(--accent); }
+
+  .hero {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 48px 80px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hero-tag {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+
+  .hero p {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.8;
+    margin-bottom: 36px;
+  }
+
+  .hero-links {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 10px 24px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.04em;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: all 0.2s;
+    cursor: pointer;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0d0f12;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  section {
+    padding: 72px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 36px;
+  }
+
+  .about-text {
+    font-size: 17px;
+    color: var(--muted);
+    line-height: 1.85;
+    max-width: 680px;
+  }
+
+  .about-text strong { color: var(--text); font-weight: 400; }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 48px;
+  }
+
+  .stat {
+    background: var(--surface);
+    padding: 28px 24px;
+  }
+
+  .stat-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 32px;
+    color: var(--text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  .experience-item {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+
+  .exp-meta {
+    padding-top: 4px;
+  }
+
+  .exp-date {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .exp-company {
+    font-size: 13px;
+    color: var(--dim);
+    letter-spacing: 0.03em;
+  }
+
+  .exp-role {
+    font-size: 16px;
+    color: var(--text);
+    font-weight: 400;
+    margin-bottom: 8px;
+  }
+
+  .exp-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .tag {
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+
+  .skill-group h3 {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 14px;
+    font-weight: 400;
+  }
+
+  .skill-list {
+    list-style: none;
+  }
+
+  .skill-list li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-list li::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  .research-gate {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 48px;
+    text-align: center;
+  }
+
+  .research-gate .lock-icon {
+    font-size: 28px;
+    margin-bottom: 20px;
+    opacity: 0.4;
+  }
+
+  .research-gate h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .research-gate p {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 440px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+
+  .edu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .edu-item:last-child { border-bottom: none; }
+
+  .edu-name { font-size: 15px; color: var(--text); margin-bottom: 4px; }
+  .edu-deg { font-size: 13px; color: var(--muted); }
+  .edu-grade { font-size: 13px; color: var(--accent); text-align: right; }
+  .edu-year { font-size: 12px; color: var(--dim); text-align: right; margin-top: 4px; }
+
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 36px 48px;
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p { font-size: 13px; color: var(--dim); }
+  footer a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
+  footer a:hover { color: var(--accent); }
+
+  @media (max-width: 640px) {
+    nav { padding: 0 20px; }
+    nav ul { gap: 20px; }
+    .hero, main { padding-left: 20px; padding-right: 20px; }
+    .experience-item { grid-template-columns: 1fr; gap: 8px; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 20px; }
+  }
 </style>
 </head>
 <body>
+
+<nav>
+  <a href="#" class="logo">AP</a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#research">Research</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <p class="hero-tag">Equity Research · Portfolio Management · Financial Markets</p>
   <h1>Aadarsh Pincha</h1>
-  <p class="sub">Analyst · CFA Level II Candidate · Bangalore</p>
-  <h2>About</h2>
-  <p>I work at the intersection of financial markets, equity research, and investment ideas. Currently preparing for CFA Level II.</p>
-  <h2>Research & Ideas</h2>
-  <p>Coming soon.</p>
-  <h2>Contact</h2>
-  <p><a href="mailto:your@email.com">aadarsh.pincha@gmail.com</a></p>
+  <p>Finance professional with hands-on experience in equity research, multi-asset analysis, and portfolio management. CFA Level II Candidate based in Bangalore.</p>
+  <div class="hero-links">
+    <a href="mailto:aadarsh.pincha@gmail.com" class="btn btn-primary">Get in touch</a>
+    <a href="https://www.linkedin.com/in/aadarsh-pincha/" target="_blank" class="btn btn-outline">LinkedIn</a>
+  </div>
+</div>
+
+<main>
+
+  <section id="about">
+    <p class="section-label">About</p>
+    <p class="about-text">
+      Results-driven finance professional with experience across <strong>equity research, investment exposure management, and portfolio management support</strong>. Skilled in multi-asset analysis covering equities, fixed income, currencies, and alternatives. Passed CFA Level I with a score of <strong>1770/1900</strong> — placing in the top 10% globally — and currently a CFA Level II Candidate.
+    </p>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-num">1770</div>
+        <div class="stat-label">CFA Level I score / 1900</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Companies researched</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Regulatory records managed</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">75%</div>
+        <div class="stat-label">Conversion rate at PYOR</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <p class="section-label">Experience</p>
+
+    <div class="experience-item">
+      <div class="exp-meta">
+        <div class="exp-date">Sep 2025 – Feb 2026</div>
+        <div class="exp-company">Negen Capital · Mumbai</div>
+      </div>
+      <div>
+        <div class="exp-role">Equity Research Analyst</div>
+        <div class="exp-desc">Conducted sector-agnostic fundamental research on 20+ listed companies across equities. Generated 5+ actionable investment ideas for the fund manager backed by multi-asset risk-reward analysis. Evaluated IPO opportunities, screened 50+ companies using factor investing signals, and maintained SEBI-compliant investment logbooks across PMS and AIF strategies.</div>
+        <div class="exp-tags">
+          <span class="tag">Equity Research</span>
+          <span class="tag">Factor Investing</span>
+          <span class="tag">PMS / AIF</span>
+          <span class="tag">SEBI Compliance</span>
+          <span class="tag">Financial Modelling</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="experience-item">
+      <div class="exp-meta">
+        <div class="exp-date">Apr 2025 – Jun 2025</div>
+        <div class="exp-company">PYOR Edge Inc. · Bangalore</div>
+      </div>
+      <div>
+        <div class="exp-role">Strategy & Business Development Associate</div>
+        <div class="exp-desc">Achieved 75% conversion rate onboarding premier engineering institutions including BITS Pilani, IIT Delhi, IIT Kharagpur, and IIT Madras into the Namaste Arbitrum 2.0 initiative. Conducted tokenomics and market depth analysis to support market-making deal evaluation.</div>
+        <div class="exp-tags">
+          <span class="tag">DeFi</span>
+          <span class="tag">Tokenomics</span>
+          <span class="tag">Business Development</span>
+          <span class="tag">Web3</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="experience-item">
+      <div class="exp-meta">
+        <div class="exp-date">Jan 2024 – May 2024</div>
+        <div class="exp-company">PYOR Edge Inc. · Bangalore</div>
+      </div>
+      <div>
+        <div class="exp-role">Data & Marketing Analyst</div>
+        <div class="exp-desc">Analysed protocol metrics identifying 100+ key trends, leading to a 10x increase in user engagement within five months. Developed financial visuals and factsheets using market and protocol-specific data. Extracted and visualised data from Dune Analytics.</div>
+        <div class="exp-tags">
+          <span class="tag">Data Analysis</span>
+          <span class="tag">Dune Analytics</span>
+          <span class="tag">Crypto Markets</span>
+          <span class="tag">Visualisation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <p class="section-label">Skills</p>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <h3>Investment & Research</h3>
+        <ul class="skill-list">
+          <li>Equity Research & Valuation</li>
+          <li>Financial Modelling</li>
+          <li>Portfolio Management</li>
+          <li>Risk Management</li>
+          <li>Factor Investing</li>
+          <li>Asset Allocation</li>
+          <li>Derivatives (Swaps, Futures, Options)</li>
+          <li>Fixed Income</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Technical</h3>
+        <ul class="skill-list">
+          <li>MS Excel (Advanced)</li>
+          <li>Python</li>
+          <li>R Studio</li>
+          <li>SPSS</li>
+          <li>Tally ERP</li>
+          <li>PowerPoint</li>
+          <li>Google Workspace</li>
+          <li>Canva</li>
+        </ul>
+      </div>
+      <div class="skill-group">
+        <h3>Education</h3>
+        <div class="edu-item">
+          <div>
+            <div class="edu-name">CFA Level II Candidate</div>
+            <div class="edu-deg">CFA Institute · Level I: 1770/1900</div>
+          </div>
+          <div>
+            <div class="edu-grade">Top 10%</div>
+            <div class="edu-year">2025</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div>
+            <div class="edu-name">St. Joseph's College of Commerce</div>
+            <div class="edu-deg">B.Sc. Economics</div>
+          </div>
+          <div>
+            <div class="edu-grade">8.62 / 10</div>
+            <div class="edu-year">2022–2025</div>
+          </div>
+        </div>
+        <div class="edu-item">
+          <div>
+            <div class="edu-name">Bethany Junior College</div>
+            <div class="edu-deg">ISC Grade 12 · Rank in Mathematics</div>
+          </div>
+          <div>
+            <div class="edu-grade">97.4%</div>
+            <div class="edu-year">2022</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="research">
+    <p class="section-label">Research & Ideas</p>
+    <div class="research-gate">
+      <div class="lock-icon">⬡</div>
+      <h2>Research ideas & investment theses</h2>
+      <p>Access to research notes and investment ideas is by request only. If you are an investor, analyst, or fellow CFA candidate, reach out to request access.</p>
+      <a href="mailto:aadarsh.pincha@gmail.com?subject=Research Access Request" class="btn btn-primary">Request access</a>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© 2026 Aadarsh Pincha</p>
+  <div style="display:flex;gap:24px;">
+    <a href="mailto:aadarsh.pincha@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/aadarsh-pincha/" target="_blank">LinkedIn</a>
+  </div>
+</footer>
+
 </body>
 </html>

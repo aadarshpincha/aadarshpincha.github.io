@@ -1,8 +1,3 @@
 baseURL = "https://aadarshpincha.github.io/"
-languageCode = "en-us"
 title = "Aadarsh Pincha"
-theme = "PaperMod"
-
-[params]
-  description = "Analyst | CFA Level II Candidate"
-ShowReadingTime = true
+theme = "hugo-profile"

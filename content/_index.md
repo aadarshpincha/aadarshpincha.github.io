@@ -1,0 +1,6 @@
+﻿---
+title: "Aadarsh Pincha"
+description: "Analyst | CFA Level II Candidate"
+---
+
+Hi, I'm Aadarsh — an analyst based in Bangalore focused on equity research, financial markets, and investment ideas.

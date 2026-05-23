@@ -3,544 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Aadarsh Pincha — Analyst</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<title>Aadarsh Pincha</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  :root {
-    --bg: #0d0f12;
-    --surface: #141720;
-    --border: #1e2230;
-    --accent: #c8a96e;
-    --text: #e8e6e0;
-    --muted: #7a7f96;
-    --dim: #3a3f52;
-  }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 300;
-    line-height: 1.75;
-    font-size: 16px;
-  }
-
-  nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 0 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-  }
-
-  nav .logo {
-    font-family: 'DM Serif Display', serif;
-    font-size: 18px;
-    color: var(--text);
-    text-decoration: none;
-    letter-spacing: 0.01em;
-  }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    gap: 36px;
-  }
-
-  nav ul a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-
-  nav ul a:hover { color: var(--accent); }
-
-  .hero {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 100px 48px 80px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .hero-tag {
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 20px;
-  }
-
-  .hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(40px, 6vw, 64px);
-    font-weight: 400;
-    line-height: 1.1;
-    color: var(--text);
-    margin-bottom: 24px;
-  }
-
-  .hero p {
-    font-size: 17px;
-    color: var(--muted);
-    max-width: 600px;
-    line-height: 1.8;
-    margin-bottom: 36px;
-  }
-
-  .hero-links {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .btn {
-    padding: 10px 24px;
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    letter-spacing: 0.04em;
-    border-radius: 4px;
-    text-decoration: none;
-    transition: all 0.2s;
-    cursor: pointer;
-    border: none;
-  }
-
-  .btn-primary {
-    background: var(--accent);
-    color: #0d0f12;
-    font-weight: 500;
-  }
-
-  .btn-primary:hover { opacity: 0.88; }
-
-  .btn-outline {
-    background: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-  }
-
-  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-  main {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 48px;
-  }
-
-  section {
-    padding: 72px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  section:last-child { border-bottom: none; }
-
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 36px;
-  }
-
-  .about-text {
-    font-size: 17px;
-    color: var(--muted);
-    line-height: 1.85;
-    max-width: 680px;
-  }
-
-  .about-text strong { color: var(--text); font-weight: 400; }
-
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    margin-top: 48px;
-  }
-
-  .stat {
-    background: var(--surface);
-    padding: 28px 24px;
-  }
-
-  .stat-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 32px;
-    color: var(--text);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .stat-label {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-  }
-
-  .experience-item {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 32px;
-    margin-bottom: 48px;
-  }
-
-  .exp-meta {
-    padding-top: 4px;
-  }
-
-  .exp-date {
-    font-size: 12px;
-    color: var(--muted);
-    letter-spacing: 0.04em;
-    margin-bottom: 4px;
-  }
-
-  .exp-company {
-    font-size: 13px;
-    color: var(--dim);
-    letter-spacing: 0.03em;
-  }
-
-  .exp-role {
-    font-size: 16px;
-    color: var(--text);
-    font-weight: 400;
-    margin-bottom: 8px;
-  }
-
-  .exp-desc {
-    font-size: 14px;
-    color: var(--muted);
-    line-height: 1.75;
-  }
-
-  .exp-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 12px;
-  }
-
-  .tag {
-    font-size: 11px;
-    letter-spacing: 0.04em;
-    padding: 3px 10px;
-    border-radius: 3px;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    color: var(--muted);
-  }
-
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 24px;
-  }
-
-  .skill-group h3 {
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 14px;
-    font-weight: 400;
-  }
-
-  .skill-list {
-    list-style: none;
-  }
-
-  .skill-list li {
-    font-size: 14px;
-    color: var(--muted);
-    padding: 5px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .skill-list li::before {
-    content: '';
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: var(--accent);
-    opacity: 0.6;
-    flex-shrink: 0;
-  }
-
-  .research-gate {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 48px;
-    text-align: center;
-  }
-
-  .research-gate .lock-icon {
-    font-size: 28px;
-    margin-bottom: 20px;
-    opacity: 0.4;
-  }
-
-  .research-gate h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px;
-    font-weight: 400;
-    color: var(--text);
-    margin-bottom: 12px;
-  }
-
-  .research-gate p {
-    font-size: 15px;
-    color: var(--muted);
-    max-width: 440px;
-    margin: 0 auto 28px;
-    line-height: 1.7;
-  }
-
-  .edu-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 20px 0;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .edu-item:last-child { border-bottom: none; }
-
-  .edu-name { font-size: 15px; color: var(--text); margin-bottom: 4px; }
-  .edu-deg { font-size: 13px; color: var(--muted); }
-  .edu-grade { font-size: 13px; color: var(--accent); text-align: right; }
-  .edu-year { font-size: 12px; color: var(--dim); text-align: right; margin-top: 4px; }
-
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 36px 48px;
-    max-width: 860px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  footer p { font-size: 13px; color: var(--dim); }
-  footer a { color: var(--muted); text-decoration: none; font-size: 13px; transition: color 0.2s; }
-  footer a:hover { color: var(--accent); }
-
-  @media (max-width: 640px) {
-    nav { padding: 0 20px; }
-    nav ul { gap: 20px; }
-    .hero, main { padding-left: 20px; padding-right: 20px; }
-    .experience-item { grid-template-columns: 1fr; gap: 8px; }
-    footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 20px; }
-  }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0d0f12;--surface:#131620;--border:#1c2030;--accent:#c8a96e;--text:#e8e6e0;--muted:#6b7088;--dim:#2a2f42}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-weight:300;line-height:1.75;font-size:16px;min-height:100vh}
+a{text-decoration:none;color:inherit}
+nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:0 48px;display:flex;align-items:center;justify-content:space-between;height:58px}
+.logo{font-family:'DM Serif Display',serif;font-size:17px;color:var(--text)}
+nav ul{list-style:none;display:flex;gap:32px}
+nav ul a{color:var(--muted);font-size:12px;letter-spacing:0.07em;text-transform:uppercase;transition:color 0.2s}
+nav ul a:hover,nav ul a.active{color:var(--accent)}
+.hero{max-width:900px;margin:0 auto;padding:110px 48px 90px}
+.hero-eyebrow{font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);margin-bottom:24px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(44px,6vw,72px);font-weight:400;line-height:1.08;margin-bottom:28px;color:var(--text)}
+.hero h1 em{font-style:italic;color:var(--muted)}
+.hero-desc{font-size:18px;color:var(--muted);max-width:560px;line-height:1.8;margin-bottom:44px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.btn{padding:11px 26px;font-size:12px;font-family:'DM Sans',sans-serif;letter-spacing:0.05em;border-radius:3px;transition:all 0.2s;cursor:pointer;display:inline-block}
+.btn-gold{background:var(--accent);color:#0d0f12;font-weight:500}
+.btn-gold:hover{opacity:0.85}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost:hover{border-color:var(--muted);color:var(--text)}
+.divider{width:100%;height:1px;background:var(--border);max-width:900px;margin:0 auto}
+.section{max-width:900px;margin:0 auto;padding:80px 48px}
+.section-label{font-size:10px;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:40px}
+.philosophy{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.philosophy-quote{font-family:'DM Serif Display',serif;font-size:26px;font-weight:400;line-height:1.4;color:var(--text)}
+.philosophy-quote em{font-style:italic;color:var(--accent)}
+.philosophy-body{font-size:15px;color:var(--muted);line-height:1.85}
+.philosophy-body p+p{margin-top:16px}
+.research-preview{margin-top:80px}
+.research-preview-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:32px}
+.research-preview-header h2{font-family:'DM Serif Display',serif;font-size:22px;font-weight:400}
+.research-preview-header a{font-size:12px;color:var(--accent);letter-spacing:0.04em}
+.idea-card{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:28px 32px;display:flex;justify-content:space-between;align-items:center;margin-bottom:1px}
+.idea-card:first-of-type{border-radius:6px 6px 0 0}
+.idea-card:last-of-type{border-radius:0 0 6px 6px}
+.idea-card:only-of-type{border-radius:6px}
+.idea-title{font-size:15px;color:var(--text);margin-bottom:4px}
+.idea-meta{font-size:12px;color:var(--muted)}
+.idea-lock{font-size:11px;letter-spacing:0.06em;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:6px}
+.lock-dot{width:6px;height:6px;border-radius:50%;background:var(--dim)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-top:64px}
+.stat{background:var(--surface);padding:28px 24px}
+.stat-num{font-family:'DM Serif Display',serif;font-size:34px;color:var(--text);line-height:1;margin-bottom:6px}
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:0.03em}
+footer{border-top:1px solid var(--border);padding:32px 48px;max-width:900px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+footer p{font-size:12px;color:var(--dim)}
+footer .foot-links{display:flex;gap:24px}
+footer .foot-links a{font-size:12px;color:var(--muted);transition:color 0.2s}
+footer .foot-links a:hover{color:var(--accent)}
+@media(max-width:680px){nav{padding:0 20px}nav ul{gap:18px}.hero,.section{padding-left:20px;padding-right:20px}.hero{padding-top:64px;padding-bottom:60px}.philosophy{grid-template-columns:1fr}.stats-row{grid-template-columns:1fr 1fr}footer{flex-direction:column;gap:16px;padding:24px 20px}}
 </style>
 </head>
 <body>
-
 <nav>
-  <a href="#" class="logo">AP</a>
+  <a href="index.html" class="logo">AP</a>
   <ul>
-    <li><a href="#about">About</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#research">Research</a></li>
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="research.html">Research</a></li>
   </ul>
 </nav>
 
 <div class="hero">
-  <p class="hero-tag">Equity Research · Portfolio Management · Financial Markets</p>
-  <h1>Aadarsh Pincha</h1>
-  <p>Finance professional with hands-on experience in equity research, multi-asset analysis, and portfolio management. CFA Level II Candidate based in Bangalore.</p>
-  <div class="hero-links">
-    <a href="mailto:aadarsh.pincha@gmail.com" class="btn btn-primary">Get in touch</a>
-    <a href="https://www.linkedin.com/in/aadarsh-pincha/" target="_blank" class="btn btn-outline">LinkedIn</a>
+  <p class="hero-eyebrow">Indian Equities · Fundamental Research · Long-term</p>
+  <h1>Aadarsh Pincha<br><em>Analyst.</em></h1>
+  <p class="hero-desc">I look for high-growth Indian businesses with durable fundamentals — bought at prices that make sense.</p>
+  <div class="hero-actions">
+    <a href="research.html" class="btn btn-gold">View research</a>
+    <a href="about.html" class="btn btn-ghost">About me</a>
   </div>
 </div>
 
-<main>
+<div class="divider"></div>
 
-  <section id="about">
-    <p class="section-label">About</p>
-    <p class="about-text">
-      Results-driven finance professional with experience across <strong>equity research, investment exposure management, and portfolio management support</strong>. Skilled in multi-asset analysis covering equities, fixed income, currencies, and alternatives. Passed CFA Level I with a score of <strong>1770/1900</strong> — placing in the top 10% globally — and currently a CFA Level II Candidate.
-    </p>
-    <div class="stats">
-      <div class="stat">
-        <div class="stat-num">1770</div>
-        <div class="stat-label">CFA Level I score / 1900</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">20+</div>
-        <div class="stat-label">Companies researched</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">500+</div>
-        <div class="stat-label">Regulatory records managed</div>
-      </div>
-      <div class="stat">
-        <div class="stat-num">75%</div>
-        <div class="stat-label">Conversion rate at PYOR</div>
-      </div>
+<div class="section">
+  <p class="section-label">Investment philosophy</p>
+  <div class="philosophy">
+    <div class="philosophy-quote">Growth means nothing without <em>discipline</em> on price.</div>
+    <div class="philosophy-body">
+      <p>My focus is on Indian listed equities — businesses where growth is structural, not cyclical. I look for companies with strong operating metrics, clean balance sheets, and management teams that allocate capital well.</p>
+      <p>Valuation is the final filter, not an afterthought. I prefer to wait for the right entry than overpay for quality.</p>
     </div>
-  </section>
+  </div>
 
-  <section id="experience">
-    <p class="section-label">Experience</p>
-
-    <div class="experience-item">
-      <div class="exp-meta">
-        <div class="exp-date">Sep 2025 – Feb 2026</div>
-        <div class="exp-company">Negen Capital · Mumbai</div>
-      </div>
+  <div class="research-preview">
+    <div class="research-preview-header">
+      <h2>Research & ideas</h2>
+      <a href="research.html">Request access →</a>
+    </div>
+    <div class="idea-card">
       <div>
-        <div class="exp-role">Equity Research Analyst</div>
-        <div class="exp-desc">Conducted sector-agnostic fundamental research on 20+ listed companies across equities. Generated 5+ actionable investment ideas for the fund manager backed by multi-asset risk-reward analysis. Evaluated IPO opportunities, screened 50+ companies using factor investing signals, and maintained SEBI-compliant investment logbooks across PMS and AIF strategies.</div>
-        <div class="exp-tags">
-          <span class="tag">Equity Research</span>
-          <span class="tag">Factor Investing</span>
-          <span class="tag">PMS / AIF</span>
-          <span class="tag">SEBI Compliance</span>
-          <span class="tag">Financial Modelling</span>
-        </div>
+        <div class="idea-title">Indian consumer staples — pricing power in inflationary cycles</div>
+        <div class="idea-meta">Sector thesis · Indian Equities</div>
       </div>
+      <div class="idea-lock"><span class="lock-dot"></span> Access required</div>
     </div>
-
-    <div class="experience-item">
-      <div class="exp-meta">
-        <div class="exp-date">Apr 2025 – Jun 2025</div>
-        <div class="exp-company">PYOR Edge Inc. · Bangalore</div>
-      </div>
+    <div class="idea-card">
       <div>
-        <div class="exp-role">Strategy & Business Development Associate</div>
-        <div class="exp-desc">Achieved 75% conversion rate onboarding premier engineering institutions including BITS Pilani, IIT Delhi, IIT Kharagpur, and IIT Madras into the Namaste Arbitrum 2.0 initiative. Conducted tokenomics and market depth analysis to support market-making deal evaluation.</div>
-        <div class="exp-tags">
-          <span class="tag">DeFi</span>
-          <span class="tag">Tokenomics</span>
-          <span class="tag">Business Development</span>
-          <span class="tag">Web3</span>
-        </div>
+        <div class="idea-title">Capital allocation patterns in mid-cap industrials</div>
+        <div class="idea-meta">Thematic research · Indian Equities</div>
       </div>
+      <div class="idea-lock"><span class="lock-dot"></span> Access required</div>
     </div>
-
-    <div class="experience-item">
-      <div class="exp-meta">
-        <div class="exp-date">Jan 2024 – May 2024</div>
-        <div class="exp-company">PYOR Edge Inc. · Bangalore</div>
-      </div>
+    <div class="idea-card">
       <div>
-        <div class="exp-role">Data & Marketing Analyst</div>
-        <div class="exp-desc">Analysed protocol metrics identifying 100+ key trends, leading to a 10x increase in user engagement within five months. Developed financial visuals and factsheets using market and protocol-specific data. Extracted and visualised data from Dune Analytics.</div>
-        <div class="exp-tags">
-          <span class="tag">Data Analysis</span>
-          <span class="tag">Dune Analytics</span>
-          <span class="tag">Crypto Markets</span>
-          <span class="tag">Visualisation</span>
-        </div>
+        <div class="idea-title">Factor signals in BSE 500 — momentum vs. quality</div>
+        <div class="idea-meta">Quantitative · Indian Equities</div>
       </div>
+      <div class="idea-lock"><span class="lock-dot"></span> Access required</div>
     </div>
-  </section>
+  </div>
 
-  <section id="skills">
-    <p class="section-label">Skills</p>
-    <div class="skills-grid">
-      <div class="skill-group">
-        <h3>Investment & Research</h3>
-        <ul class="skill-list">
-          <li>Equity Research & Valuation</li>
-          <li>Financial Modelling</li>
-          <li>Portfolio Management</li>
-          <li>Risk Management</li>
-          <li>Factor Investing</li>
-          <li>Asset Allocation</li>
-          <li>Derivatives (Swaps, Futures, Options)</li>
-          <li>Fixed Income</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Technical</h3>
-        <ul class="skill-list">
-          <li>MS Excel (Advanced)</li>
-          <li>Python</li>
-          <li>R Studio</li>
-          <li>SPSS</li>
-          <li>Tally ERP</li>
-          <li>PowerPoint</li>
-          <li>Google Workspace</li>
-          <li>Canva</li>
-        </ul>
-      </div>
-      <div class="skill-group">
-        <h3>Education</h3>
-        <div class="edu-item">
-          <div>
-            <div class="edu-name">CFA Level II Candidate</div>
-            <div class="edu-deg">CFA Institute · Level I: 1770/1900</div>
-          </div>
-          <div>
-            <div class="edu-grade">Top 10%</div>
-            <div class="edu-year">2025</div>
-          </div>
-        </div>
-        <div class="edu-item">
-          <div>
-            <div class="edu-name">St. Joseph's College of Commerce</div>
-            <div class="edu-deg">B.Sc. Economics</div>
-          </div>
-          <div>
-            <div class="edu-grade">8.62 / 10</div>
-            <div class="edu-year">2022–2025</div>
-          </div>
-        </div>
-        <div class="edu-item">
-          <div>
-            <div class="edu-name">Bethany Junior College</div>
-            <div class="edu-deg">ISC Grade 12 · Rank in Mathematics</div>
-          </div>
-          <div>
-            <div class="edu-grade">97.4%</div>
-            <div class="edu-year">2022</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Companies researched</div></div>
+    <div class="stat"><div class="stat-num">1770</div><div class="stat-label">CFA Level I score / 1900</div></div>
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Investment ideas generated</div></div>
+    <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Companies screened</div></div>
+  </div>
+</div>
 
-  <section id="research">
-    <p class="section-label">Research & Ideas</p>
-    <div class="research-gate">
-      <div class="lock-icon">⬡</div>
-      <h2>Research ideas & investment theses</h2>
-      <p>Access to research notes and investment ideas is by request only. If you are an investor, analyst, or fellow CFA candidate, reach out to request access.</p>
-      <a href="mailto:aadarsh.pincha@gmail.com?subject=Research Access Request" class="btn btn-primary">Request access</a>
-    </div>
-  </section>
-
-</main>
+<div class="divider"></div>
 
 <footer>
-  <p>© 2026 Aadarsh Pincha</p>
-  <div style="display:flex;gap:24px;">
+  <p>© 2026 Aadarsh Pincha · Bangalore</p>
+  <div class="foot-links">
     <a href="mailto:aadarsh.pincha@gmail.com">Email</a>
     <a href="https://www.linkedin.com/in/aadarsh-pincha/" target="_blank">LinkedIn</a>
   </div>
 </footer>
-
 </body>
 </html>
